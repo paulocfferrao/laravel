@@ -12,11 +12,24 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
+        $messages = [
+            'name.required' => 'O nome é obrigatório.',
+            'name.min' => 'O nome deve ter pelo menos 3 caracteres.',
+            'name.max' => 'O nome não pode ter mais que 50 caracteres.',
+            'email.required' => 'O e-mail é obrigatório.',
+            'email.email' => 'O e-mail deve ser um endereço de e-mail válido.',
+            'email.unique' => 'O e-mail já está em uso.',
+            'password.required' => 'A senha é obrigatória.',
+            'password.min' => 'A senha deve ter pelo menos 6 caracteres.',
+            'password.max' => 'A senha não pode ter mais que 20 caracteres.',
+            'password.confirmed' => 'A confirmação da senha não coincide.',
+        ];
+
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'min:3', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'max:20', 'confirmed'],
-        ]);
+        ], $messages);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
@@ -28,6 +41,6 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return response()->json(['message' => 'User registered successfully', 'user' => $user], 201);
+        return response()->json(['message' => 'Usuário cadastrado com sucesso', 'user' => $user], 201);
     }
 }
