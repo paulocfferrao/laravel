@@ -43,4 +43,10 @@ class RegisterController extends Controller
 
         return response()->json(['message' => 'Usuário cadastrado com sucesso', 'user' => $user], 201);
     }
+
+    public function index()
+    {
+        $users = User::all();
+        return response()->json($users);
+    }
 }

@@ -38,12 +38,40 @@ button {
     cursor: pointer;
 }
 
-/* button:hover {
-    background-color: #FF3023;
-} */
+#userList {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
 
+}
 
-/* ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com */
+#userList li {
+    background-color: #edf2f7;
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#userList li:nth-child(odd) {
+    background-color: #e2e8f0;
+}
+
+.list-title {
+    margin-top: 2%;
+    width: 30%;
+
+}
+
+.container {
+    display: grid;
+    place-items: center;
+    position: relative;
+}
+
 *,
 ::after,
 ::before {

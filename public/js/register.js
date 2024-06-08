@@ -1,4 +1,7 @@
-document.getElementById('registerForm').addEventListener('submit', async function(e) {
+window.onload = function (e) {
+    fetchUsers()
+}
+document.getElementById('registerForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const form = e.target;
@@ -24,7 +27,21 @@ document.getElementById('registerForm').addEventListener('submit', async functio
             }
         }
     } else {
+        fetchUsers()
         alert('Usuário registrado com sucesso!');
         form.reset();
     }
 });
+
+async function fetchUsers() {
+    const response = await fetch('api/users');
+    const users = await response.json();
+    const userList = document.getElementById('userList');
+
+    userList.innerHTML = '';
+    users.forEach(user => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${user.name} - ${user.email}`;
+        userList.appendChild(listItem);
+    });
+}
